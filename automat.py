@@ -1,9 +1,9 @@
 import random
 
 if __name__ == '__main__':
-    rule = input("Podaj regułę: ")
-    n = int(input("Podaj długość ciągu: "))
-    k = int(input("Podaj liczbę kroków: "))
+    rule = input("Enter rule: ")
+    n = int(input("Enter len of str: "))
+    k = int(input("Enter num of steps: "))
     new_sign = ['_','*']
     # slownik
     dictionary = {
@@ -18,17 +18,28 @@ if __name__ == '__main__':
     }
 
     # Tworzenie ciągu
-    ciag = ''
+    str = ''
     for _ in range(n):
-        ciag += random.choice(['*', '_'])
+        str += random.choice(['*', '_'])
 
-    print("Początkowy ciąg:", ciag)
+    print("Początkowy ciąg:", str)
 
     # Zmienianie ciągu
-    nowy_ciag = ''
-    for i in range(k):
-        nowy_ciag += new_sign[int(dictionary[ciag[i-1]+ciag[i]+ciag[(i+1)*(i + 1 < n)]])]
+    new_str = ''
+    i = 0
+    for _ in range(k):
+        if i == n:
+            str = new_str
+            new_str = ''
+            i = 0
+        new_str += new_sign[int(dictionary[str[i-1]+str[i]+str[(i+1)*(i + 1 < n)]])]
+        i+=1
+    if k < n:
+        for _ in range(n - k):
+            new_str += '_'
 
-    print("koncowy ciag: ", nowy_ciag)
+
+
+    print("koncowy ciag: ", new_str)
 
 
